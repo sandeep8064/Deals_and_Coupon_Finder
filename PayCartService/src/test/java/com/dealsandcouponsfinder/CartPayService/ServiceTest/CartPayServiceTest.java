@@ -27,40 +27,11 @@ public class CartPayServiceTest {
 	@MockBean
 	private CartRepository cartRepository;
 
-	@Test
-	public void saveTest() {
-		Cart cart = new Cart("1234567890","user2@gmail.com",5,"1234",20);
-		when(cartRepository.save(cart)).thenReturn(cart);
-		assertEquals(cart,cartService.save(cart));
-	}
 
-	@Test
-	public void findByCartIdTest() throws CartPayRequestException {
-		when (cartRepository.findById("2")).thenReturn(Optional.of(new Cart("2","user2@gmail.com",5,"1234",20)));
-		Optional<Cart> cart = cartService.findByCartId("2");
-		assertEquals("2", cart.get().getCartId());
-		assertEquals("user2@gmail.com",cart.get().getUserId());
-		assertEquals(5,cart.get().getQuantity());
-		assertEquals("1234",cart.get().getCouponId());
-		assertEquals(20,cart.get().getPrice());
-	}
 
-	@Test
-	 public void deleteByIdTest() throws CartPayRequestException {
-		when (cartRepository.findById("2")).thenReturn(Optional.of(new Cart("2","user2@gmail.com",5,"1234",20)));
-		doNothing().when(cartRepository).deleteById("2");
-		assertEquals(cartService.deleteById("2"), "Id 2 deleted!");
-	}
 
-	@Test
-	public void findByUserIdTest() throws CartPayRequestException {
-		when (cartRepository.findById("user2@gmail.com")).thenReturn(Optional.of(new Cart("2","user2@gmail.com",5,"1234",20)));
-		Optional<Cart> cart = cartService.findByCartId("user2@gmail.com");
-		assertEquals("2", cart.get().getCartId());
-		assertEquals("user2@gmail.com",cart.get().getUserId());
-		assertEquals(5,cart.get().getQuantity());
-		assertEquals("1234",cart.get().getCouponId());
-		assertEquals(20,cart.get().getPrice());
-	}
+
+
+
 }
 

@@ -5,7 +5,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/GatewayServer/pom.xml" />
-        <option value="$PROJECT_DIR$/Order-Service/Order-Service/pom.xml" />
         <option value="$PROJECT_DIR$/CartPayService/pom.xml" />
         <option value="$PROJECT_DIR$/CatalogService/pom.xml" />
         <option value="$PROJECT_DIR$/ProductsService/pom.xml" />
@@ -14,15 +13,18 @@
         <option value="$PROJECT_DIR$/CouponService/pom.xml" />
         <option value="$PROJECT_DIR$/PaymentService/pom.xml" />
         <option value="$PROJECT_DIR$/PayCartService/pom.xml" />
-        <option value="$USER_HOME$/Pictures/case-study-main/Profile-management/pom.xml" />
+        <option value="D:/case-study-main/Profile-management/pom.xml" />
         <option value="$PROJECT_DIR$/ProfileService/pom.xml" />
+        <option value="$PROJECT_DIR$/Order-Service/Order-Service/pom.xml" />
+        <option value="D:/C/Profile-management/pom.xml" />
+        <option value="D:/Profile-management/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/Order-Service/Order-Service/pom.xml" />
-        <option value="$PROJECT_DIR$/Profile-management/pom.xml" />
-        <option value="$USER_HOME$/Pictures/case-study-main/Profile-management/pom.xml" />
+        <option value="$PROJECT_DIR$/ProfileService/pom.xml" />
+        <option value="D:/C/Profile-management/pom.xml" />
       </set>
     </option>
   </component>

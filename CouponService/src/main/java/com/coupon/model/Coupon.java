@@ -1,6 +1,5 @@
 package com.coupon.model;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +17,7 @@ public class Coupon {
 	@Id
 	private String couponId;
 
-	@Field
-	private String userId;
+
 	@Field
 	private String category;
 	@Field

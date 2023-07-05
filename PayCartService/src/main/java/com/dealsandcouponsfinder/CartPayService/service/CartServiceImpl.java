@@ -1,8 +1,10 @@
 package com.dealsandcouponsfinder.CartPayService.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.dealsandcouponsfinder.CartPayService.model.Addcart;
 import com.microservice.ProductsService.models.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,36 @@ public class CartServiceImpl implements CartService {
         Products[] products= productsService.getAllProducts().toArray(new Products[0]);
         return List.of(products);
     }
-	public Cart save(Cart cart) {
-		Cart cart1 = cartRepository.save(cart);
-		return cart1;
+
+	public void storeProductInCart(Addcart addcart) {
+
+		com.dealsandcouponsfinder.CartPayService.model.Products product = addcart.getProducts();
+		Cart cart = addcart.getCart();
+
+		// Add the product to the cart
+		cart.setProducts(product);
+
+		// Save the updated cart to the database
+		cartRepository.save(cart);
 	}
+
+	public double calculateTotalPrice() {
+		List<Cart> carts = cartRepository.findAll();
+		double totalPrice = 0.0;
+
+		for (Cart cart : carts) {
+			com.dealsandcouponsfinder.CartPayService.model.Products product = cart.getProducts();
+			totalPrice += product.getPrice();
+		}
+
+		return totalPrice;
+	}
+
+
+
+
+
+
 
 	public List<Cart> findAll() {
 		return (List<Cart>) cartRepository.findAll();
@@ -43,20 +71,6 @@ public class CartServiceImpl implements CartService {
 		}
 	}
 
-	@Override
-	public double getTotalPrice(String userId) {
-		List<Optional<Cart>> cart = cartRepository.findByUserId(userId);
-		if (cart.isEmpty()) {
-			return 0.0;
-		} else {
-			double sum = 0.0;
-			for (Optional<Cart> c : cart) {
-				double cartPrice = c.get().getQuantity() * c.get().getPrice();
-				sum = sum + cartPrice;
-			}
-			return sum;
-		}
-	}
 
 	@Override
 	public String deleteAllCart(String userId) {
@@ -77,13 +91,5 @@ public class CartServiceImpl implements CartService {
 		}
 	}
 
-	@Override
-	public List<Optional<Cart>> findByUserId(String userId) {
-			List<Optional<Cart>> cart = cartRepository.findByUserId(userId);
-			if (cart.isEmpty()) {
-				throw new CartPayRequestException("UserId is not found");
-			} else {
-				return cart;
-			}
-		}
+
 }

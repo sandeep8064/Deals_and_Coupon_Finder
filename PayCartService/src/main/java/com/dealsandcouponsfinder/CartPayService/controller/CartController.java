@@ -3,23 +3,21 @@ package com.dealsandcouponsfinder.CartPayService.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.dealsandcouponsfinder.CartPayService.model.Addcart;
+import com.dealsandcouponsfinder.CartPayService.repository.CartRepository;
 import com.dealsandcouponsfinder.CartPayService.service.ProductsService;
 import com.microservice.ProductsService.models.Products;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.dealsandcouponsfinder.CartPayService.model.Cart;
 import com.dealsandcouponsfinder.CartPayService.service.CartService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -29,6 +27,8 @@ public class CartController {
 	CartService cartService;
 
 	@Autowired
+	CartRepository cartRepository;
+	@Autowired
 	ProductsService productsService;
   //creating method which returns list of products
 	@GetMapping("/seeproducts")
@@ -37,24 +37,23 @@ public class CartController {
         return cartService.getAllProducts();
     }
 
-	@PostMapping("/addCart")
-	public Cart addCart(@RequestBody Cart cart) {
-		Cart cart1 = cartService.save(cart);
-		return cart1;
-	}
+	@PostMapping("/addtocart")
+	public ResponseEntity<String> addToCart(@RequestBody Addcart addcart) {
+		try {
+			// Extract the product and cart from the Addcart object
+			com.dealsandcouponsfinder.CartPayService.model.Products product = addcart.getProducts();
+			Cart cart = addcart.getCart();
 
-	@GetMapping("/find/cartId/{cartId}")
-	public Optional<Cart> searchCartByCartId(@PathVariable("cartId") String cartId) {
-		Optional<Cart> cart = cartService.findByCartId(cartId);
-		log.info("find cart details");
-		return cart;
-	}
+			// Add the product to the cart
+			cart.setProducts(product);
 
-	@GetMapping("/find/userId/{userId}")
-	public List<Optional<Cart>> searchCartByUserId(@PathVariable("userId") String userId) {
-		List<Optional<Cart>> cart2 = cartService.findByUserId(userId);
-		log.info("to find userId" +userId + "is available");
-		return cart2;
+			// Save the updated cart to the database
+			cartRepository.save(cart);
+
+			return ResponseEntity.ok("Product added to cart successfully.");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while adding product to cart.");
+		}
 	}
 
 	@GetMapping("/findall")
@@ -69,22 +68,13 @@ public class CartController {
 		return result;
 	}
 
-	@GetMapping("/totalPrice/{userId}")
-	    public double getTotalPrice(@PathVariable("userId") String userId) {
-	        double result=cartService.getTotalPrice(userId);
-	    	return result;
-	        }
-
-	@DeleteMapping("/deleteAllCart/{userId}")
-	public String deleteAllCart(@PathVariable("userId") String userId) {
-		String result=cartService.deleteAllCart(userId);
-		return result;
+	@GetMapping("/totalPrice")
+	public double getTotalPrice() {
+		return cartService.calculateTotalPrice();
 	}
 
-	@PutMapping("/updateCart")
-	public Cart updateCart(@RequestBody Cart cart) {
-		Cart cart1 = cartService.save(cart);
-		return cart1;
-	}
+
+
+
 
 }

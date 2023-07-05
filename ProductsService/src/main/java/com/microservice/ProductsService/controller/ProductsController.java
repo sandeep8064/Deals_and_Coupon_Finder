@@ -19,6 +19,7 @@ import com.microservice.ProductsService.models.Products;
 import com.microservice.ProductsService.service.ProductsServiceImpl;
 
 
+@CrossOrigin
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
@@ -44,12 +45,12 @@ public class ProductsController {
 	
 	
 	
-	@PostMapping("/product")
+	@PostMapping("/add")
 	public Products addProduct(@RequestBody Products product) {
 		return productsServiceImpl.addProduct(product);
 	}
 	
-	@PutMapping("/product")
+	@PutMapping("/update")
 	public Products updateProduct(@RequestBody Products product) {
 		return productsServiceImpl.updateProduct(product);
 	}

@@ -25,5 +25,5 @@ public interface CouponService {
 
 
 
-	List<Coupon> searchByUserId(String userId);
+
 }

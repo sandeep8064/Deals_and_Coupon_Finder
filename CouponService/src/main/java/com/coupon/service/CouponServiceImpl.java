@@ -32,11 +32,6 @@ public class CouponServiceImpl implements CouponService {
 		}
 	}
 
-	@Override
-	public List<Coupon> searchByUserId(String userId) {
-		List<Coupon> coupon = couponRepository.searchByUserId(userId);
-		return  coupon;
-	}
 
 
 

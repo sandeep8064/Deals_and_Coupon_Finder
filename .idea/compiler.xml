@@ -7,16 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ProductsService" />
         <module name="discovery-server" />
-        <module name="ProfileService" />
+        <module name="PayCartService" />
+        <module name="ProductsService" />
+        <module name="profilemanagement" />
         <module name="GatewayServer" />
         <module name="CouponService" />
-        <module name="PayCartService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Order-Service" target="17" />
+      <module name="profilemanagement (1)" target="17" />
+      <module name="profilemanagement (2)" target="17" />
+      <module name="ProfileService" target="17" />
       <module name="UserService" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -30,6 +33,9 @@
       <module name="ProfileService" options="-parameters" />
       <module name="UserService" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
+      <module name="profilemanagement" options="-parameters" />
+      <module name="profilemanagement (1)" options="-parameters" />
+      <module name="profilemanagement (2)" options="-parameters" />
     </option>
   </component>
 </project>
