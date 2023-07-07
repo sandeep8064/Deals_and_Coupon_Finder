@@ -48,7 +48,7 @@ public class CartServiceImpl implements CartService {
 			com.dealsandcouponsfinder.CartPayService.model.Products product = cart.getProducts();
 			totalPrice += product.getPrice();
 		}
-
+        totalPrice = Double.parseDouble(String.format("%.2f", totalPrice));
 		return totalPrice;
 	}
 

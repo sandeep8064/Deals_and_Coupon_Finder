@@ -74,6 +74,22 @@ public class CartController {
 	}
 
 
+	@GetMapping("/discount/{coupon}")
+	public double calculateDiscount(@PathVariable String coupon) {
+		// Extract the number from the coupon string
+		String numberString = coupon.replaceAll("\\D+", ""); // Remove non-digit characters
+		int discountPercentage = Integer.parseInt(numberString);
+         double totalPrice=cartService.calculateTotalPrice();
+		// Calculate the discount based on the extracted number
+		double discount = 0.0;
+		if (discountPercentage > 0 && discountPercentage <= 100) {
+			discount = (discountPercentage / 100.0) * totalPrice; // Assuming totalPrice is a variable representing the total price of products in the cart
+		}
+		double price = Double.parseDouble(String.format("%.2f", totalPrice-discount));
+
+		return  price;
+	}
+
 
 
 
