@@ -1,0 +1,60 @@
+.log-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .log-form-container {
+    width: 400px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .log-form {
+    margin-bottom: 20px;
+  }
+  
+  .log-form label {
+    font-weight: bold;
+  }
+  
+  .log-form input[type='text'],
+  .log-form input[type='password'] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .log-form button {
+    width: 100%;
+  }
+  
+  .signup-link {
+    text-align: center;
+  }
+  
+  .signup-link a {
+    color: #007bff;
+  }
+  
+  
+  
+  .background-image {
+    position: absolute;
+    top: 50px;
+    left: 900px;
+    width: 50%;
+    height: 93%;
+    object-fit: cover;
+  }
+
+  body {
+    background-color: #dbebed; 
+  }
+  

@@ -1,0 +1,47 @@
+.coupon-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .coupon-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .coupon-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .coupon-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .coupon-details {
+    color: #333;
+  }
+  
+  .coupon-category {
+    font-weight: bold;
+  }
+  
+  .coupon-count,
+  .coupon-offer,
+  .coupon-company {
+    margin-bottom: 5px;
+  }
+  
+  .coupon-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #34ebc3; /* Add your desired background color here */
+  }
