@@ -1,11 +1,10 @@
 package com.dealsandcouponsfinder.CartPayService.service;
 
 
-
-
 import com.microservice.ProductsService.models.Products;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -16,5 +15,9 @@ public interface ProductsService {
     public List<Products> getAllProducts();
 
 
-    }
+
+    @GetMapping("products/{id}")
+    public Products getProductById(@PathVariable String id);
+
+}
 

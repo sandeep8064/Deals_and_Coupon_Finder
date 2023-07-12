@@ -1,15 +1,12 @@
 package com.coupon.controller;
 
-import java.util.List;
-
-
-import java.util.Optional;
-
+import com.coupon.model.Coupon;
+import com.coupon.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.coupon.model.Coupon;
-import com.coupon.service.CouponService;
+import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin
@@ -27,17 +24,19 @@ public class CouponController {
 		return coupon;
 	}
 
+	@GetMapping("/verify/{couponCode}")
+	public boolean verifyCouponCode(@PathVariable String couponCode) {
+		return couponService.verifyCouponCode(couponCode);
+	}
+
+
 	@GetMapping("/find/id/{couponId}")
 	public Optional<Coupon> searchCouponByCouponId(@PathVariable("couponId") String couponId) {
 		Optional<Coupon> coupon = couponService.findByCouponId(couponId);
 		return coupon;
 	}
 
-	@GetMapping("/find/category/{category}")
-	public List<Optional<Coupon>> searchCouponByCategory(@PathVariable("category") String category) {
-		List<Optional<Coupon>> coupon = couponService.findByCategory(category);
-		return coupon;
-	}
+
 
 
 
@@ -47,17 +46,8 @@ public class CouponController {
 		return result;
 	}
 
-	@DeleteMapping("/delete/category/{category}")
-	public String deleteCouponByCategory(@PathVariable("category") String category) {
-		String result = couponService.deleteByCategory(category);
-		return result;
-	}
 
-	@DeleteMapping("/delete/companyName/{companyName}")
-	public String deleteCouponByCompanyName(@PathVariable("companyName") String companyName) {
-		String result = couponService.deleteByCompanyName(companyName);
-		return result;
-	}
+
 
 	@GetMapping("/findall")
 	public List<Coupon> findCoupon() {

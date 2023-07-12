@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import com.dealsandcouponsfinder.profilemanagement.repository.CredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -87,13 +88,14 @@ public class ProfileController {
 		return profile;
 	}
 
+
 	@PostMapping("/login")
-	public String loginProfile(@RequestBody Credentials cred) {
-		boolean log = profileService.login((Credentials) cred);
-		if (log) {
-			return "Login is successful";
+	public ResponseEntity<String> loginProfile(@RequestBody Credentials credentials) {
+		boolean loginSuccessful = profileService.login(credentials);
+		if (loginSuccessful) {
+			return ResponseEntity.ok("Login successful");
 		} else {
-			return "Login is failed";
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
 		}
 	}
 

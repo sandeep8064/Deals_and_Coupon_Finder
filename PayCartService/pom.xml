@@ -32,6 +32,16 @@
 		<version>4.13.2</version><!--$NO-MVN-MAN-VER$-->
          <scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.razorpay</groupId>
+			<artifactId>razorpay-java</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+		<!-- Thanks for using https://jar-download.com -->
+
+
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>

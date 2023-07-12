@@ -19,7 +19,6 @@ public class Products {
 	
 	private String name;
 	private double price;
-    private String rating;
 	private String imageUrl;
 	private String category;
 	

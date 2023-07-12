@@ -5,7 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.dealsandcouponsfinder.profilemanagement.model.User1;
+import com.dealsandcouponsfinder.profilemanagement.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,6 +19,7 @@ import com.dealsandcouponsfinder.profilemanagement.model.Credentials;
 import com.dealsandcouponsfinder.profilemanagement.model.Profile;
 import com.dealsandcouponsfinder.profilemanagement.repository.CredentialsRepository;
 import com.dealsandcouponsfinder.profilemanagement.repository.ProfileRepository;
+import org.springframework.data.mongodb.core.query.Query;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -27,6 +32,8 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Autowired
     private RestTemplate restTemplate;
+	@Autowired
+	private UserRepo repo;
     String url2 = "http://Coupons/coupon" ;
     public List<Coupon> getAllProducts()
     {
@@ -67,13 +74,16 @@ public class ProfileServiceImpl implements ProfileService {
 		}
 	}
 
+
+
 	public boolean login(Credentials credentials) {
-		Optional<Credentials> storedCredentials = credentialsRepository.findByUsernameAndPassword(
-				credentials.getUsername(),
-				credentials.getPassword()
-		);
-		return storedCredentials.isPresent();
+		User1 user = repo.findByUsername(credentials.getUsername());
+		if (user != null && user.getPassword().equals(credentials.getPassword())) {
+			return true; // Login successful
+		}
+		return false; // Login failed
 	}
+
 
 	public boolean logout(Credentials cred) {
 		Optional<Credentials> credentials = credentialsRepository.findById(cred.getUsername());

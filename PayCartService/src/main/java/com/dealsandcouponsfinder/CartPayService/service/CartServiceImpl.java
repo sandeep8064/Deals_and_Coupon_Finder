@@ -1,17 +1,14 @@
 package com.dealsandcouponsfinder.CartPayService.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import com.dealsandcouponsfinder.CartPayService.model.Addcart;
+import com.dealsandcouponsfinder.CartPayService.exception.CartPayRequestException;
+import com.dealsandcouponsfinder.CartPayService.model.Cart;
+import com.dealsandcouponsfinder.CartPayService.repository.CartRepository;
 import com.microservice.ProductsService.models.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dealsandcouponsfinder.CartPayService.exception.CartPayRequestException;
-import com.dealsandcouponsfinder.CartPayService.model.Cart;
-import com.dealsandcouponsfinder.CartPayService.repository.CartRepository;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -22,30 +19,23 @@ public class CartServiceImpl implements CartService {
 	@Autowired
     private ProductsService productsService; //feign
 
+	@Autowired
+	private  CouponService couponService;
+
     public List<Products> getAllProducts()
     {
         Products[] products= productsService.getAllProducts().toArray(new Products[0]);
         return List.of(products);
     }
 
-	public void storeProductInCart(Addcart addcart) {
 
-		com.dealsandcouponsfinder.CartPayService.model.Products product = addcart.getProducts();
-		Cart cart = addcart.getCart();
-
-		// Add the product to the cart
-		cart.setProducts(product);
-
-		// Save the updated cart to the database
-		cartRepository.save(cart);
-	}
 
 	public double calculateTotalPrice() {
 		List<Cart> carts = cartRepository.findAll();
 		double totalPrice = 0.0;
 
 		for (Cart cart : carts) {
-			com.dealsandcouponsfinder.CartPayService.model.Products product = cart.getProducts();
+			Products product = cart.getProducts();
 			totalPrice += product.getPrice();
 		}
         totalPrice = Double.parseDouble(String.format("%.2f", totalPrice));

@@ -21,7 +21,7 @@ public class Coupon {
 	@Field
 	private String category;
 	@Field
-	private int count;
+	private String code;
 	@Field
 	private String offer;
 	@Field
